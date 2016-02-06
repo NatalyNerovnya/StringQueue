@@ -8,7 +8,7 @@ using Program;
 
 namespace StringQueue
 {
-    public class CustomStringQueue : IEnumerable
+    public class CustomStringQueue : IEnumerable, ICloneable
     {
         private string[] queue;
         private int capacity, head, tail;
@@ -76,26 +76,32 @@ namespace StringQueue
                 throw new ArgumentException("The queue is empty!");
         }
 
-        private void DeleteHead()
-        {
-            queue[head] = null;
-            head = ++head % capacity;
-        }
-
-        private bool IsEmpty()
-        {
-            if (tail % capacity == head % capacity)
-                return false;
-            else
-                return true;
-        }
-
         public string Peek()
         {
             if (IsEmpty())
                 return queue[head];
             else
                 throw new ArgumentException("The queue is empty!");
+        }
+
+        public void Clear()
+        {
+            for (int i = head, j = 0; j < capacity; j++)
+            {
+                queue[i] = null;
+                i = ++i % capacity;
+            }
+            head = tail = 0;
+        }
+
+        public bool Contain(string str)
+        {
+            foreach (var variable in queue)
+            {
+                if (variable == str)
+                    return true;
+            }
+            return false;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -106,6 +112,27 @@ namespace StringQueue
         public IEnumerator GetEnumerator()
         {
             return new QueueIterartor(queue, tail, head);
+        }
+
+        public CustomStringQueue Clone()
+        {
+            return new CustomStringQueue(queue);
+        }
+
+        object ICloneable.Clone()
+        {
+            return Clone();
+        }
+
+        private void DeleteHead()
+        {
+            queue[head] = null;
+            head = ++head % capacity;
+        }
+
+        private bool IsEmpty()
+        {
+            return tail % capacity != head % capacity;
         }
 
     }
