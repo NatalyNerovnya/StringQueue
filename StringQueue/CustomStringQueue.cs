@@ -72,6 +72,7 @@ namespace StringQueue
                 return returnValue;
             }
             else
+
                 throw new ArgumentException("The queue is empty!");
         }
 
@@ -97,17 +98,6 @@ namespace StringQueue
                 throw new ArgumentException("The queue is empty!");
         }
 
-        public void ShowQueue()
-        {
-            for (int i = head; i <= tail;)
-            {
-                Console.Write(" " + queue[i]);
-                if (i == tail)
-                    break;
-                i = ++i % capacity;
-            }
-        }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -115,7 +105,7 @@ namespace StringQueue
 
         public IEnumerator GetEnumerator()
         {
-            return new QueueIterartor(queue);
+            return new QueueIterartor(queue, tail, head);
         }
 
     }
