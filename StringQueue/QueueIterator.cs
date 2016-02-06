@@ -5,33 +5,39 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StringQueue;
 
 namespace Program
 {
     internal class QueueIterartor : IEnumerator
     {
         public string[] array;
-        private int position = -1;
+        private int position;
+        private readonly int tailPosition, headPosition;
 
-        public QueueIterartor(string[] list)
+        public QueueIterartor(string[] list, int tail, int head)
         {
             array = list;
+            position = (head-1)% list.Length;
+            tailPosition = tail;
+            headPosition = head;
         }
 
         public bool MoveNext()
         {
-            if (position == array.Length - 1)
+            if (position == tailPosition)
             {
                 Reset();
                 return false;
             }
-            position++;
+            position = ++position % array.Length;
             return true;
         }
 
+
         public void Reset()
         {
-            position = -1;
+            position = (headPosition-1)%array.Length;
         }
 
         object IEnumerator.Current
