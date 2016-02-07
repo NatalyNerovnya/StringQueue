@@ -18,17 +18,45 @@ namespace Program
                 Console.WriteLine(variable);
             }
             Console.WriteLine( '\n');
+            Console.WriteLine("fifth: " + q1.Contain("fifth") + '\n');
             q1.Enqueue("fifth");
+            Console.WriteLine("fifth: " + q1.Contain("fifth") + '\n');
             foreach (var variable in q1)
             {
                 Console.WriteLine(variable);
             }
             q1.Dequeue();
-            Console.WriteLine('\n');
-            
+            Console.WriteLine('\n'+"before clear");
             foreach (var variable in q1)
             {
-                Console.WriteLine( variable);
+                Console.WriteLine(variable);
+            }
+            CustomStringQueue q2 = q1.Clone();
+            q1.Clear();
+            Console.WriteLine('\n'+"after Clear()");
+            foreach (var variable in q1)
+            {
+                Console.WriteLine(variable);
+            }
+
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            q1.Enqueue("fifth");
+            foreach (var variable in q1)
+            {
+                Console.WriteLine(variable);
+            }
+            Console.WriteLine('\n');
+            foreach (var variable in q2)
+            {
+                Console.WriteLine(variable);
             }
             Console.ReadLine();
             
