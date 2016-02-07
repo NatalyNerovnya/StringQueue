@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Program;
 
 namespace StringQueue
 {
@@ -111,7 +110,10 @@ namespace StringQueue
 
         public IEnumerator GetEnumerator()
         {
-            return new QueueIterartor(queue, tail, head);
+            for (int i = head; i < tail;i++)
+            {
+                yield return queue[i];
+            }
         }
 
         public CustomStringQueue Clone()
