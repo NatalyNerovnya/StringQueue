@@ -110,7 +110,7 @@ namespace StringQueue
 
         public IEnumerator GetEnumerator()
         {
-            for (int i = head; i < tail;i++)
+            for (int i = head; i <= tail;i++)
             {
                 yield return queue[i];
             }
@@ -118,7 +118,12 @@ namespace StringQueue
 
         public CustomStringQueue Clone()
         {
-            return new CustomStringQueue(queue);
+            string[] newQueue = new string[queue.Length];
+            for (int i = head, j = 0; i <= tail; i++, j++)
+            {
+                newQueue[j] = queue[i];
+            }
+            return new CustomStringQueue(newQueue);
         }
 
         object ICloneable.Clone()
@@ -128,7 +133,7 @@ namespace StringQueue
 
         private void DeleteHead()
         {
-            queue[head] = null;
+            queue[head] = "************";
             head = ++head % capacity;
         }
 
